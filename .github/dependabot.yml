@@ -7,6 +7,13 @@ updates:
       day: monday
     open-pull-requests-limit: 5
     labels: [dependencies]
+    ignore:
+      # Isolated builds already select the latest compatible backend; raising the
+      # minimum on every Setuptools release creates noise without changing builds.
+      - dependency-name: setuptools
+      # SymPy 1.14 requires mpmath <1.4. Revisit when SymPy relaxes that bound.
+      - dependency-name: mpmath
+        versions: [">=1.4"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
