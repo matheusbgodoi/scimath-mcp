@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If SciMath MCP supports your work, please cite the software using this metadata."
+title: "SciMath MCP"
+type: software
+authors:
+  - family-names: "Godoi"
+    given-names: "Matheus Barboza de"
+repository-code: "https://github.com/matheusbgodoi/scimath-mcp"
+url: "https://github.com/matheusbgodoi/scimath-mcp"
+license: MIT
+version: 0.1.0
+date-released: 2026-08-11
+keywords:
+  - Model Context Protocol
+  - scientific computing
+  - engineering
+  - symbolic mathematics
+  - units

@@ -1,0 +1,42 @@
+name: Bug report
+description: Report an incorrect result, protocol problem, or reproducible failure
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not report security vulnerabilities here; use a private security advisory.
+  - type: input
+    id: version
+    attributes:
+      label: SciMath version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: client
+    attributes:
+      label: MCP client
+      options: [Codex CLI, Claude Code, OpenCode, Direct MCP SDK, Other]
+    validations:
+      required: true
+  - type: textarea
+    id: call
+    attributes:
+      label: Minimal tool call and observed output
+      description: Remove credentials and private data before submitting.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior and independent reference
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: OS, Python version, client version
+    validations:
+      required: true
