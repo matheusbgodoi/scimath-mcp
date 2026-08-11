@@ -48,5 +48,10 @@ def test_mcp_direct_tool_call_has_structured_output() -> None:
 
 def test_server_instructions_force_tool_use_policy() -> None:
     assert mcp.instructions is not None
-    assert "Do not perform arithmetic mentally" in mcp.instructions
-    assert len(mcp.instructions) < 1_000
+    assert "every derived quantitative claim" in mcp.instructions
+    assert "plausibility checks" in mcp.instructions
+    assert "audit every quantitative claim" in mcp.instructions
+    assert "original unit-bearing values" in mcp.instructions
+    assert "rounding and conversions must also be tool-produced" in mcp.instructions
+    assert "unverified instead of guessing" in mcp.instructions
+    assert len(mcp.instructions) < 1_300

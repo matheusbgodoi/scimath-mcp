@@ -49,6 +49,24 @@ def test_engineering_formula_with_units() -> None:
     assert result["result"] == "106.896551724"
 
 
+def test_dimensionful_calculate_requires_explicit_output_unit() -> None:
+    with pytest.raises(
+        InputError,
+        match="Dimensionful calculations require an explicit output_unit",
+    ):
+        calculate_engine(
+            {
+                "expression": "P*L^3/(3*E*I)",
+                "variables": {
+                    "P": "18 kN",
+                    "L": "2.4 m",
+                    "E": "210 GPa",
+                    "I": "6.5e-6 m^4",
+                },
+            }
+        )
+
+
 def test_unit_mismatch_is_rejected() -> None:
     with pytest.raises(InputError, match="Unit conversion failed"):
         calculate_engine(

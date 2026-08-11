@@ -11,13 +11,20 @@ from scimath_mcp.isolation import ComputationError, run_isolated
 from scimath_mcp.models import MathResult, Measurement
 
 SERVER_INSTRUCTIONS = (
-    "Mandatory numerical policy: use this server for every non-trivial numeric, symbolic, "
-    "unit, statistical, matrix, uncertainty, or physical-constant result. Do not perform "
-    "arithmetic mentally. Preserve the user's units and significant figures, pass explicit "
-    "variables, inspect warnings, and report both exact and approximate results when returned. "
-    "Reject incompatible dimensions instead of guessing. Tools are read-only and local. "
-    "Expressions allow explicit + - * / % ** (^ is accepted as power), direct documented "
-    "function calls, pi/e/I, and no Python code or attribute access."
+    "Mandatory numerical policy: use this server for every derived quantitative claim, both "
+    "intermediate and final. This includes arithmetic, symbolic math, units, statistics, "
+    "matrices, uncertainties, constants, estimates, percentages, comparisons, orders of "
+    "magnitude, and plausibility checks. A value copied unchanged from the user needs no call; "
+    "any transformation of it does. Never calculate, estimate, round, or recompute tool output "
+    "mentally or with generic code. Before answering, audit every quantitative claim and call "
+    "the appropriate tool for any unsupported claim. For dimensional work, pass the original "
+    "unit-bearing values and output_unit; never preconvert to bare magnitudes or attach units to "
+    "a unitless result. Quote numeric output exactly; rounding and conversions must also be "
+    "tool-produced. Preserve formulas, variables, units, domain, precision, exact and approximate "
+    "results, and warnings. If an operation is unsupported or fails, state that it is unverified "
+    "instead of guessing. Reject incompatible dimensions. Tools are read-only and local. "
+    "Expressions allow explicit + - * / % ** (^ is power), documented direct function calls, "
+    "pi/e/I, and no Python code or attribute access."
 )
 
 mcp = MCPServer(
@@ -57,9 +64,10 @@ def calculate(
     angle_unit: Literal["radians", "degrees"] = "radians",
     output_unit: str | None = None,
 ) -> MathResult:
-    """Evaluate one arithmetic/scientific expression safely. Use explicit `*` and variables;
-    variable strings may carry units (for example `12.4 kN*m`). Returns exact and high-precision
-    numeric forms when unitless. Set output_unit for dimensional engineering calculations."""
+    """Evaluate one arithmetic/scientific expression safely. Use explicit `*` and variables.
+    For dimensional work, pass original unit-bearing variable strings (for example `12.4 kN*m`)
+    and always set output_unit; never add manual conversion factors to the expression. Returns
+    exact and high-precision numeric forms when unitless."""
     return _result(
         "calculate",
         {

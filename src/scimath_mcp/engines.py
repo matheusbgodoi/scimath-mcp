@@ -254,11 +254,15 @@ def _quantity_result(
     normalized_input: Any,
 ) -> MathResult:
     quantity = value if isinstance(value, Quantity) else ureg.Quantity(value)
+    if not quantity.dimensionless and not output_unit:
+        raise InputError(
+            "Dimensionful calculations require an explicit output_unit. Retry with the requested "
+            "unit and the original unscaled physical expression; do not insert manual conversion "
+            "factors or attach a unit after calculation."
+        )
     try:
         if output_unit:
             quantity = quantity.to(output_unit)
-        elif not quantity.dimensionless:
-            quantity = quantity.to_reduced_units()
     except (DimensionalityError, ValueError) as exc:
         raise InputError(f"Unit conversion failed: {exc}.") from None
     magnitude = quantity.magnitude
