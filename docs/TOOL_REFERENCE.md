@@ -27,8 +27,10 @@ request a compatible `output_unit` when useful.
 }
 ```
 
-`angle_unit` is `radians` or `degrees`. Precision is 2–100 significant digits. Unit-aware
-magnitudes use Pint's numeric backend; precision controls display formatting.
+`angle_unit` is `radians` or `degrees`. Precision is 2–100 significant digits. Dimensionful
+calculations require `output_unit`: keep the governing expression unscaled and pass original
+unit-bearing variable strings. Unit-aware magnitudes use Pint's numeric backend; precision controls
+display formatting.
 
 ## `convert_units`
 
