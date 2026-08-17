@@ -46,7 +46,7 @@ scimath-mcp = "scimath_mcp.server:main"
 [dependency-groups]
 dev = [
   "pytest>=9.1,<10",
-  "ruff>=0.16,<1",
+  "ruff>=0.16.3,<1",
 ]
 
 [tool.setuptools.packages.find]
